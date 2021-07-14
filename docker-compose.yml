@@ -7,7 +7,7 @@ services:
     environment:
      - NODE_ENV=production
      - PORT=3000
-     - API_BASE_URL=https://api.tvmaze.com
+     - API_BASE_URL=https://api.mindcodingexperience.com
      - ASSET_PREFIX=http://localhost:3001
     volumes:
      - .:/app
