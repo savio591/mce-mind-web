@@ -1,0 +1,22 @@
+version: '3'
+services:
+  nextjs:
+    build: .
+    ports:
+     - "3000:3000"
+    environment:
+     - NODE_ENV=production
+     - PORT=3000
+     - API_BASE_URL=https://api.tvmaze.com
+     - ASSET_PREFIX=http://localhost:3001
+    volumes:
+     - .:/app
+  nextjs-cdn:
+    image: thisiserico/devcdn:latest
+    environment:
+     - ORIGIN_ADDRESS=http://nextjs:3000
+     - CDN_CUSTOM_HEADERS=access-control-allow-origin:*
+    ports:
+     - "3001:8123"
+    depends_on:
+     - nextjs
