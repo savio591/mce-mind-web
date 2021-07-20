@@ -26,7 +26,9 @@ export function Button({
       data-style={style ?? 'default'}
       data-type={type ?? 'default'}
       className={styles.button}
-      onClick={onClick}
+      onClick={() => {
+        onClick();
+      }}
       disabled={isLoading ?? false}
     >
       {children}
