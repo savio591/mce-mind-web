@@ -3,6 +3,8 @@
 [![wakatime](https://wakatime.com/badge/github/savio591/mce-mind-web.svg)](https://wakatime.com/badge/github/savio591/mce-mind-web)
 # MCE - Case 2 - Plataforma de agendamento para personal trainers
 
+**Projeto em construção! Clique [aqui](https://github.com/savio591/mce-mind-web/tree/dev) para ir à branch de desenvolvimento**
+
 Segundo case do programa [Mind Coding Experience(MCE)](https://conteudos.provi.com.br/mind-coding-experience/), feito pela [Mind Consulting](https://mindconsulting.com.br/) em parceria com a fintech [Provi](https://provi.com.br), com o intuito de evoluir as habilidades técnicas participando de projetos e recebendo acompanhamento de profissionais do mercado.
 
 ## A proposta do case 2: Storytelling
