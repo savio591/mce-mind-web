@@ -1,5 +1,7 @@
 ![image](https://user-images.githubusercontent.com/3879613/125519551-d46b63ee-50c5-4ead-be19-a911043df2a6.png)
 
+![jest](https://github.com/savio591/mce-mind-web/actions/workflows/jest.yml/badge.svg?branch=dev)
+![codequality](https://github.com/savio591/mce-mind-web/actions/workflows/codeInspector.yml/badge.svg?branch=dev)
 [![wakatime](https://wakatime.com/badge/github/savio591/mce-mind-web.svg)](https://wakatime.com/badge/github/savio591/mce-mind-web)
 # MCE - Case 2 - Plataforma de agendamento para personal trainers
 
