@@ -58,6 +58,7 @@ $orange300: #db7826;
 
   &[data-size='small'] {
     width: auto;
+    margin: 0;
     padding: 0 10px;
     height: 40px;
     font-style: normal;
@@ -82,6 +83,7 @@ $orange300: #db7826;
 
   &[data-type='icon'] {
     width: 85px;
+    margin: 0;
     height: 85px;
     padding: 1rem;
     color: white;
