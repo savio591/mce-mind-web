@@ -9,7 +9,8 @@
     "lint": "next lint",
     "start": "next start",
     "storybook": "start-storybook -p 6006",
-    "test": "yarn jest"
+    "test": "yarn jest",
+    "chromatic": "chromatic --exit-zero-on-changes"
   },
   "dependencies": {
     "@carbon/icons-react": "^10.35.0",
@@ -46,6 +47,7 @@
     "@typescript-eslint/parser": "^4.28.3",
     "babel-jest": "^27.0.6",
     "babel-loader": "^8.2.2",
+    "chromatic": "^5.10.0-canary.0",
     "cross-env": "^7.0.3",
     "css-loader": "^6.0.0",
     "eslint": "7.30.0",
