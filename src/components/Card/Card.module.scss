@@ -1,0 +1,57 @@
+$gray: #373737;
+$orange: #fea051;
+
+.card {
+  margin-top: 1.25rem;
+  display: flex;
+  flex-direction: row;
+  background-color: $orange;
+  width: 100%;
+  max-width: 640px;
+  padding: 1rem 1.5rem;
+
+  border-radius: 12px;
+
+  align-items: center;
+  justify-content: space-between;
+
+  .left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    img {
+      border-radius: 1024px;
+    }
+
+    .column {
+      p,
+      span {
+        font-family: 'DM Sans', sans-serif;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 34px;
+        color: #ffffff;
+      }
+
+      span {
+        font-weight: 700;
+      }
+
+      span[data-size='small'] {
+        font-weight: 500;
+      }
+    }
+  }
+
+  time {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    flex-direction: row;
+
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 26px;
+  }
+}
