@@ -2,12 +2,10 @@ $gray: #373737;
 $orange: #fea051;
 
 .card {
-  margin-top: 1.25rem;
   display: flex;
   flex-direction: row;
   background-color: $orange;
   width: 100%;
-  max-width: 640px;
   padding: 1rem 1.5rem;
 
   border-radius: 12px;
