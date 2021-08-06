@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { parseWeekDayName } from '../../../utils/parseWeekDayName';
+import { parseWeekDayName } from '../../utils/parseWeekDayName';
 
 import styles from './WeekDayPick.module.scss';
 
@@ -37,12 +37,19 @@ export function WeekDayPick({
     weekData?.isAvailable ?? false
   );
 
+  // Was created a count event to doesn't send props
+  // to parent when render.
+  const [checkCount, setCheckCount] = useState(0);
+
   // Sends component state to Parent on change their values.
   useEffect(() => {
-    setWeekData(weekDay, { isAvailable });
-  }, [isAvailable, setWeekData, weekDay]);
+    if (checkCount !== 0) {
+      setWeekData(weekDay, { isAvailable });
+    }
+  }, [checkCount, isAvailable, setWeekData, weekDay]);
 
   function handleIsAvailableCheckbox(checked: boolean): void {
+    setCheckCount(checkCount + 1);
     setIsAvailable(checked);
   }
 
