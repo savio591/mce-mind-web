@@ -12,7 +12,7 @@ const Template: Story<CalendarProps> = args => <Calendar {...args} />;
 export const Default = Template.bind({});
 Default.args = {
   availableDays: [
-    new Date(2021, 7, 2),
+    new Date(),
     new Date(2021, 7, 3),
     new Date(2021, 7, 5),
     new Date(2021, 7, 12),

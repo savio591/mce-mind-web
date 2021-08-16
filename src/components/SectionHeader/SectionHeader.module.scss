@@ -1,0 +1,35 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  & > div {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    h1 {
+      font-size: 36px;
+      line-height: 47px;
+    }
+
+    h2 {
+      font-size: 18px;
+      line-height: 23px;
+
+      color: #fea051;
+    }
+  }
+
+  a {
+    line-height: 47px;
+    font-weight: 700;
+    font-size: 24px;
+    //line-height: 31px;
+    color: #373737;
+
+    &:hover {
+      text-decoration-line: underline;
+      color: #000;
+    }
+  }
+}
