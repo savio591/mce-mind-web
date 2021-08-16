@@ -22,7 +22,13 @@ export function SectionHeader({
   const headingDate = parseISOStringToHeadingDateInfo(date, refDate);
 
   return (
-    <div className={styles.container}>
+    <div
+      className={styles.container}
+      // divider
+      style={{
+        borderBottom: !headingDate ? '1px solid #888888' : 'none',
+      }}
+    >
       <div>
         <h1>{title}</h1>
         <h2>{headingDate}</h2>
