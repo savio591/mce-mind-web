@@ -1,32 +1,35 @@
 import { useEffect, useState } from 'react';
 import DayPicker, { DayModifiers } from 'react-day-picker';
 
-import 'react-day-picker/lib/style.css';
-import './Calendar.scss';
-
 export interface CalendarProps {
-  availableDays: Date[];
-  selectedDate: Date;
-  onSelectDate: (date: Date) => Date;
+  availableDays?: string[];
+  selectedDate: string;
+  onSelectDate?: (date: string | undefined) => string | void;
+  refDate: string;
 }
 
 export function Calendar({
   availableDays,
   selectedDate,
+  refDate,
   onSelectDate,
 }: CalendarProps): JSX.Element {
-  const [selectedDatePick, setSelectedDatePick] = useState(new Date());
+  const [selectedDatePick, setSelectedDatePick] = useState('');
 
   useEffect(() => {
-    setSelectedDatePick(new Date(selectedDate));
+    setSelectedDatePick(selectedDate);
   }, [selectedDate]);
+
+  if (!selectedDate || !refDate) {
+    return <h1>Falha ao renderizar calendário</h1>;
+  }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   function handleDateChange(day: Date, modifiers: DayModifiers): void {
     // if (modifiers.available) {
+    setSelectedDatePick(day.toISOString());
     if (onSelectDate) {
-      onSelectDate(day);
-      setSelectedDatePick(day);
+      onSelectDate(day.toISOString());
     }
     // }
   }
@@ -34,9 +37,14 @@ export function Calendar({
   return (
     <DayPicker
       weekdaysShort={['D', 'S', 'T', 'Q', 'Q', 'S', 'S']}
-      fromMonth={new Date()}
-      modifiers={{ available: availableDays }}
-      selectedDays={selectedDatePick}
+      fromMonth={new Date(refDate)}
+      modifiers={{
+        available:
+          availableDays && availableDays.length > 0
+            ? availableDays?.map(day => new Date(day))
+            : [new Date(refDate)],
+      }}
+      selectedDays={new Date(selectedDatePick)}
       onDayClick={handleDateChange}
       months={[
         'Janeiro',
