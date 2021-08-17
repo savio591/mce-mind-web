@@ -5,7 +5,7 @@ import { FaRegClock } from 'react-icons/fa';
 import { Card } from '../Card';
 import styles from './Appointments.module.scss';
 
-type AppointmentsData = {
+export type AppointmentsData = {
   id: number;
   name: string;
   date: Date;
@@ -14,7 +14,7 @@ type AppointmentsData = {
 }[];
 
 export interface AppointmentsProps {
-  appointmentsData: AppointmentsData;
+  appointmentsData: AppointmentsData | undefined;
 }
 
 interface AppointmentsAcc {
@@ -26,6 +26,14 @@ interface AppointmentsAcc {
 export function Appointments({
   appointmentsData,
 }: AppointmentsProps): JSX.Element {
+  if (
+    appointmentsData === undefined ||
+    appointmentsData === null ||
+    appointmentsData.length <= 0
+  ) {
+    return <h1>Você não tem agendamentos disponíveis no momento.</h1>;
+  }
+
   const nextAppointmentNameIndex = closestIndexTo(
     new Date(),
     appointmentsData.map(item => item.date)

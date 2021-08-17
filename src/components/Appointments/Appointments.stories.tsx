@@ -52,3 +52,13 @@ Default.args = {
     },
   ],
 };
+
+export const NoAppointments = Template.bind({});
+NoAppointments.args = {
+  appointmentsData: [],
+};
+
+export const AppointmentsUndefined = Template.bind({});
+NoAppointments.args = {
+  appointmentsData: undefined,
+};
