@@ -7,30 +7,26 @@ const Avatar = createAvatarComponent({
 });
 
 export interface NotificationsButtonProps {
-  quantity: number;
-  name: string;
   imageSrc: string;
+  name: string;
+  quantity: number;
+  title: string;
   onClick: () => void;
 }
 
 export function NotificationsButton({
-  quantity,
-  onClick,
   imageSrc,
   name,
+  quantity,
+  onClick,
+  title,
 }: NotificationsButtonProps): JSX.Element {
   return (
     <div className={styles.container}>
-      {/* <button
-        type="button"
-        onClick={() => {
-          onClick();
-        }}
-      /> */}
       <Avatar
         src={imageSrc}
         name={name}
-        title="Notificações"
+        title={title || 'Notificações'}
         size="50"
         round="8px"
         color="#C4C4C4"
