@@ -2,14 +2,27 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  flex-shrink: 1;
+  width: 100%;
+  height: min-content;
+
+  @media (max-width: 960px) {
+    flex-direction: column;
+  }
 
   & > div {
     display: flex;
     flex-direction: column;
     gap: 12px;
+
     h1 {
       font-size: 36px;
       line-height: 47px;
+
+      @media (max-width: 480px) {
+        font-size: 28px;
+        line-height: 36px;
+      }
     }
 
     h2 {
@@ -35,6 +48,11 @@
     &:hover {
       text-decoration-line: underline;
       color: #000;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 1.25rem;
+      line-height: 3rem;
     }
   }
 }

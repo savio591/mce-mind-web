@@ -3,6 +3,7 @@ ul.container {
   flex-direction: column;
   flex-grow: 1;
   width: 100%;
+  max-width: 360px;
 
   li + li {
     border-top: 1px solid var(--orange);

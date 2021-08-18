@@ -1,6 +1,6 @@
-/* eslint-disable consistent-return */
 import { closestIndexTo } from 'date-fns';
 import { FaRegClock } from 'react-icons/fa';
+import Spinner from 'react-loading-skeleton';
 
 import { Card } from '../Card';
 import styles from './Appointments.module.scss';
@@ -8,14 +8,22 @@ import styles from './Appointments.module.scss';
 export type AppointmentsData = {
   id: number;
   name: string;
-  date: Date;
+  date: string;
   image?: string;
   phone?: string;
 }[];
 
-export interface AppointmentsProps {
-  appointmentsData: AppointmentsData | undefined;
-}
+export type AppointmentsProps =
+  | {
+      appointmentsData?: AppointmentsData;
+      refDate?: string;
+      isLoading?: boolean;
+    }
+  | {
+      appointmentsData: AppointmentsData;
+      refDate: string;
+      isLoading: boolean;
+    };
 
 interface AppointmentsAcc {
   morning: AppointmentsData;
@@ -25,24 +33,31 @@ interface AppointmentsAcc {
 
 export function Appointments({
   appointmentsData,
+  refDate,
+  isLoading,
 }: AppointmentsProps): JSX.Element {
   if (
     appointmentsData === undefined ||
     appointmentsData === null ||
-    appointmentsData.length <= 0
+    appointmentsData.length <= 0 ||
+    !refDate
   ) {
-    return <h1>Você não tem agendamentos disponíveis no momento.</h1>;
+    return (
+      <h1 className={styles.noAppointment}>
+        Você não tem agendamentos disponíveis no momento.
+      </h1>
+    );
   }
 
   const nextAppointmentNameIndex = closestIndexTo(
-    new Date(),
-    appointmentsData.map(item => item.date)
+    new Date(refDate),
+    appointmentsData.map(item => new Date(item.date))
   );
   const nextAppointment = appointmentsData[nextAppointmentNameIndex];
 
   const appointments = appointmentsData.reduce(
     (acc, current) => {
-      const hour = current.date.getHours();
+      const hour = new Date(current.date).getHours();
       if (hour <= 12) {
         return {
           ...acc,
@@ -70,14 +85,14 @@ export function Appointments({
     } as AppointmentsAcc
   );
 
-  return (
+  return !isLoading ? (
     <div className={styles.appointments}>
       <div className={styles.nextAppointment}>
         <h2>Próximo agendamento:</h2>
         <Card
           name={nextAppointment.name}
           phone={nextAppointment.phone}
-          date={nextAppointment.date}
+          date={new Date(nextAppointment.date)}
           image={nextAppointment.image}
         />
       </div>
@@ -91,7 +106,7 @@ export function Appointments({
                   <FaRegClock size={20} />
                   {new Intl.DateTimeFormat('pt-BR', {
                     timeStyle: 'short',
-                  }).format(appointment.date)}
+                  }).format(new Date(appointment.date))}
                 </time>
                 <Card
                   name={appointment.name}
@@ -113,7 +128,7 @@ export function Appointments({
                   <FaRegClock size={20} />
                   {new Intl.DateTimeFormat('pt-BR', {
                     timeStyle: 'short',
-                  }).format(appointment.date)}
+                  }).format(new Date(appointment.date))}
                 </time>
                 <Card
                   name={appointment.name}
@@ -135,7 +150,7 @@ export function Appointments({
                   <FaRegClock size={20} />
                   {new Intl.DateTimeFormat('pt-BR', {
                     timeStyle: 'short',
-                  }).format(appointment.date)}
+                  }).format(new Date(appointment.date))}
                 </time>
                 <Card
                   name={appointment.name}
@@ -148,5 +163,7 @@ export function Appointments({
         </div>
       )}
     </div>
+  ) : (
+    <Spinner height={56} count={8} circle />
   );
 }

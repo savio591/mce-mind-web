@@ -15,14 +15,14 @@ interface WeekData {
   isAvailable: boolean;
 }
 
-type WeeksData = {
+export type WeeksData = {
   weekDay: WeekDay;
   weekData: WeekData;
 }[];
 
 export interface SetAvailableWeeklyHourProps {
   serverWeeksData: WeeksData;
-  setRequestWeekData: (weekDay: WeekDay, data: WeekDataCallback) => void;
+  setRequestWeekData?: (weekDay: WeekDay, data: WeekDataCallback) => void;
 }
 
 export function SetAvailableWeeklyHour({
@@ -36,12 +36,14 @@ export function SetAvailableWeeklyHour({
   }, [serverWeeksData]);
 
   function handleWeekData(weekDay: WeekDay, data: WeekDataCallback): void {
-    setRequestWeekData(weekDay, data);
+    if (setRequestWeekData) {
+      setRequestWeekData(weekDay, data);
+    }
   }
 
   return (
     <ul className={styles.container}>
-      {weeksData.map(week => {
+      {weeksData?.map(week => {
         return (
           <WeekDayPick
             {...week}
@@ -49,7 +51,11 @@ export function SetAvailableWeeklyHour({
             key={week.weekDay}
           />
         );
-      })}
+      }) ?? (
+        <p style={{ marginTop: '2rem' }}>
+          Não foi possível mostrar a disponibilidade
+        </p>
+      )}
     </ul>
   );
 }

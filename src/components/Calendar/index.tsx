@@ -1,12 +1,19 @@
 import { useEffect, useState } from 'react';
 import DayPicker, { DayModifiers } from 'react-day-picker';
 
-export interface CalendarProps {
-  availableDays?: string[];
-  selectedDate: string;
-  onSelectDate?: (date: string | undefined) => string | void;
-  refDate: string;
-}
+export type CalendarProps =
+  | {
+      availableDays?: string[];
+      selectedDate: string;
+      onSelectDate?: (date: string | undefined) => string | void;
+      refDate: string;
+    }
+  | {
+      availableDays?: string[];
+      selectedDate?: string;
+      onSelectDate?: (date: string | undefined) => string | void;
+      refDate?: string;
+    };
 
 export function Calendar({
   availableDays,
@@ -17,7 +24,7 @@ export function Calendar({
   const [selectedDatePick, setSelectedDatePick] = useState('');
 
   useEffect(() => {
-    setSelectedDatePick(selectedDate);
+    setSelectedDatePick(selectedDate ?? '');
   }, [selectedDate]);
 
   if (!selectedDate || !refDate) {
