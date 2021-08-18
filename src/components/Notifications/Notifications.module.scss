@@ -1,0 +1,63 @@
+.container {
+  position: relative;
+  display: block;
+  width: fit-content;
+}
+
+ul.notificationsList {
+  position: absolute;
+  list-style: none;
+  visibility: hidden;
+
+  // top: 50%;
+  // right: -12px;
+  top: 50%; /* position the top  edge of the element at the middle of the parent */
+  left: 50%; /* position the left edge of the element at the middle of the parent */
+  transform: translateX(-100%);
+  width: max-content;
+
+  opacity: 0;
+  background: #fff;
+  border-radius: 10px;
+  color: #626679;
+  padding: 0;
+
+  font-family: 'Poppins', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 10px;
+
+  transition: background 0.2s, opacity 0.2s, transform 0.1s;
+
+  &[data-notifications-list-align='right'] {
+    transform: translateX(0%);
+  }
+
+  &[data-is-notificationslist-showed='true'] {
+    display: block;
+    visibility: visible;
+    opacity: 1;
+  }
+
+  li {
+    height: 44px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 14px;
+
+    &:first-child {
+      // padding-top: 8px;
+      border-radius: 10px 10px 0 0;
+    }
+    &:last-child {
+      // padding-bottom: 8px;
+      border-radius: 0 0 10px 10px;
+    }
+
+    &:hover {
+      background: #eff1f9bb;
+    }
+  }
+}
