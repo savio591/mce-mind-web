@@ -4,11 +4,11 @@
   "private": true,
   "scripts": {
     "build": "next build",
-    "build-storybook": "build-storybook --modern",
+    "build-storybook": "build-storybook",
     "dev": "next dev",
     "lint": "next lint",
     "start": "next start",
-    "storybook": "start-storybook -p 6006 --modern",
+    "storybook": "start-storybook -p 6006",
     "test": "yarn jest --verbose",
     "chromatic": "chromatic --exit-zero-on-changes"
   },
@@ -35,8 +35,9 @@
   "devDependencies": {
     "@babel/core": "^7.14.6",
     "@storybook/addon-a11y": "^6.3.6",
-    "@storybook/addon-essentials": "^6.4.0-alpha.17",
-    "@storybook/addon-links": "^6.4.0-alpha.17",
+    "@storybook/addon-actions": "^6.4.0-alpha.30",
+    "@storybook/addon-essentials": "^6.4.0-alpha.30",
+    "@storybook/addon-links": "^6.4.0-alpha.30",
     "@storybook/addon-storyshots": "^6.4.0-alpha.17",
     "@storybook/builder-webpack5": "^6.4.0-alpha.17",
     "@storybook/manager-webpack5": "^6.4.0-alpha.17",
