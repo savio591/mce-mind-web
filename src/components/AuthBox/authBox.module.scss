@@ -1,0 +1,64 @@
+div.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 460px;
+  background: #ffffff;
+  border-radius: 1rem;
+  padding: 4.5rem;
+
+  gap: 2rem;
+
+  &[data-is-testing='true'] {
+    margin: 0 auto;
+    border: 1px solid black;
+    // background: #808080;
+  }
+
+  & > img {
+    margin: 0 auto;
+    display: block;
+    justify-content: center;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    gap: 24px;
+
+    a {
+      // It will hug the width of the anchor.
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 23px;
+
+      color: #333333;
+      margin: 0 auto 0 0;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  & > i {
+    // display: block;
+    // margin: 0 auto;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 23px;
+    font-style: normal;
+
+    color: #333333;
+
+    span {
+      font-weight: bold;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
