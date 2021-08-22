@@ -12,9 +12,8 @@ export default async function createProvider(
   res: NextApiResponse
 ): Promise<void> {
   const isPOSTRequest = req.method === 'POST';
-  const isJson = req.headers['content-type'] === 'application/json';
 
-  if (isPOSTRequest && isJson) {
+  if (isPOSTRequest) {
     const { name, email, password, phone } = req.body;
 
     const isValid = await validateCreateProvider(req.body);
@@ -55,11 +54,6 @@ export default async function createProvider(
     }
 
     res.status(201).json({ message: 'User was created with success' });
-    return;
-  }
-
-  if (!isJson) {
-    res.status(401).json({ error: 'this content type is not allowed' });
     return;
   }
 

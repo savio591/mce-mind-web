@@ -9,8 +9,11 @@ export interface InputProps
   inputColorTheme: 'default' | 'dark';
   inputFontSize: 14 | 16 | '14' | '16';
   inputType: 'default' | 'password';
-  onInputValue: (value: string) => string;
-  onPasswordButtonClick: (passwordShown: boolean) => boolean;
+  label?: string;
+  isConfirmPassword?: boolean;
+  currentPassword?: string;
+  onInputValue: (value: string) => void;
+  onPasswordButtonClick?: (passwordShown: boolean) => void;
   showPassword?: true | false;
 }
 
@@ -18,8 +21,11 @@ export function Input({
   inputColorTheme,
   inputFontSize,
   inputType,
+  label,
   onInputValue,
   onPasswordButtonClick,
+  isConfirmPassword,
+  currentPassword,
   showPassword,
   ...props
 }: InputProps): JSX.Element {
@@ -35,10 +41,10 @@ export function Input({
 
   if (props.required && inputColorTheme === 'dark') {
     return (
-      <div className={styles.container}>
+      <label className={styles.container} htmlFor={label ?? inputType}>
         <input
-          {...props}
           type="text"
+          {...props}
           className={styles.input}
           data-font-size={inputFontSize}
           data-theme={inputColorTheme}
@@ -56,13 +62,13 @@ export function Input({
         >
           <BiCheck size={12} />
         </div>
-      </div>
+      </label>
     );
   }
 
   if (inputType === 'password') {
     return (
-      <div className={styles.container}>
+      <label className={styles.container} htmlFor={label ?? inputType}>
         <input
           {...props}
           type={passwordShown ? 'text' : 'password'}
@@ -71,6 +77,15 @@ export function Input({
           data-theme={inputColorTheme}
           onInput={event => {
             onInputValue(event.currentTarget.value);
+            if (isConfirmPassword) {
+              if (currentPassword === event.currentTarget.value) {
+                event.currentTarget.setCustomValidity('');
+                return;
+              }
+              event.currentTarget.setCustomValidity(
+                'As senhas não coincidem. Verifique novamente'
+              );
+            }
           }}
         />
         <button
@@ -78,7 +93,9 @@ export function Input({
           className={styles.passwordButton}
           onClick={() => {
             handleTogglePassword();
-            onPasswordButtonClick(passwordShown);
+            if (onPasswordButtonClick) {
+              onPasswordButtonClick(passwordShown);
+            }
           }}
           role="switch"
           aria-checked={passwordShown}
@@ -86,7 +103,7 @@ export function Input({
         >
           {passwordShown ? <FiEye /> : <FiEyeOff />}
         </button>
-      </div>
+      </label>
     );
   }
 

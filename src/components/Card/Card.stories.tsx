@@ -24,7 +24,7 @@ Default.args = {
 };
 
 WithDate.args = {
-  date: new Date(),
+  date: new Date(1970, 0, 0, 8, 30, 0, 0),
   name: 'Savio Castelo',
   phone: '+55 96 99112-3620',
   image: 'https://github.com/savio591.png',

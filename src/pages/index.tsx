@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { GetServerSideProps } from 'next';
 import { getSession, signIn } from 'next-auth/client';
 import { FormEvent, useState } from 'react';
@@ -14,6 +15,7 @@ import styles from './Login.module.scss';
 import logoImg from '../../public/images/logo.png';
 
 export default function Home(): JSX.Element {
+  const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   // const [isShowedPassword, setIsShowedPassword] = useState(false);
@@ -43,6 +45,7 @@ export default function Home(): JSX.Element {
         draggable: true,
         progress: undefined,
       });
+      router.push('/dashboard');
     } catch (err) {
       toast.error('⚠️ Email e/ou senha inválido(a)', {
         position: 'top-right',

@@ -3,12 +3,12 @@ import { ReactNode } from 'react';
 import styles from './Button.module.scss';
 
 export interface ButtonProps {
-  children: ReactNode;
+  children?: ReactNode;
   size?: 'default' | 'small';
-  style?: 'default' | 'outline';
-  type?: 'default' | 'icon';
+  style?: 'default' | 'outline' | 'circle' | 'circle-outline';
+  type?: 'default' | 'icon' | 'submit';
   isLoading?: boolean;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 export function Button({
@@ -21,13 +21,16 @@ export function Button({
 }: ButtonProps): JSX.Element {
   return (
     <button
-      type="button"
+      type={type === 'submit' ? 'submit' : 'button'}
       data-size={size ?? 'default'}
       data-style={style ?? 'default'}
-      data-type={type ?? 'default'}
+      data-type={type === 'submit' ? 'default' : type ?? 'default'}
       className={styles.button}
-      onClick={() => {
-        onClick();
+      onClick={event => {
+        if (onClick) {
+          event.preventDefault();
+          onClick();
+        }
       }}
       disabled={isLoading ?? false}
     >

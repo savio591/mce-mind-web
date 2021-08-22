@@ -16,9 +16,8 @@ export default async function signIn(
   res: NextApiResponse
 ): Promise<void> {
   const isPostRequest = req.method === 'POST';
-  const isJson = req.headers['content-type'] === 'application/json';
 
-  if (isPostRequest && isJson) {
+  if (isPostRequest) {
     try {
       const { email, password } = req.body;
       const isRequestValid = validateAuth(req.body);
@@ -43,10 +42,6 @@ export default async function signIn(
     }
   }
 
-  if (!isJson) {
-    res.status(401).json({ error: 'this content type is not allowed' });
-    return;
-  }
   res.setHeader('Allow', 'POST');
   res.status(405).end('Method not allowed');
 }

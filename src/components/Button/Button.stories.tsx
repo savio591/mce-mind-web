@@ -1,5 +1,5 @@
 import { Meta, Story } from '@storybook/react';
-import { FaList } from 'react-icons/fa';
+import { FaFacebook, FaList } from 'react-icons/fa';
 
 import { Button, ButtonProps } from './index';
 
@@ -41,4 +41,12 @@ export const Icon = Template.bind({});
 Icon.args = {
   children: <FaList size={35} />,
   type: 'icon',
+  style: 'circle',
+};
+
+export const Social = Template.bind({});
+Social.args = {
+  children: <FaFacebook size={35} />,
+  type: 'icon',
+  style: 'default',
 };
