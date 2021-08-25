@@ -14,7 +14,6 @@ const now = '2021-08-02T11:15:00.000Z';
 export const Default = Template.bind({});
 Default.args = {
   availableDays: [
-    new Date().toISOString(),
     new Date(2021, 7, 3).toISOString(),
     new Date(2021, 7, 5).toISOString(),
     new Date(2021, 7, 12).toISOString(),

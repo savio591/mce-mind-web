@@ -40,6 +40,8 @@
     "prettier/prettier": "error",
     "react/react-in-jsx-scope": "off",
     "react/prop-types": "off",
+    "no-empty-function": "off",
+    "@typescript-eslint/no-empty-function": "off",
     "jsx-a11y/anchor-is-valid": [
       "error",
       {

@@ -1,10 +1,12 @@
 import { Args, Meta, Story } from '@storybook/react';
+import withMock from 'storybook-addon-mock';
 
 import Dashboard, { DashboardProps } from '../pages/dashboard';
 
 export default {
   title: 'Pages/Dashboard',
   component: Dashboard,
+  decorators: [withMock],
 } as Meta;
 
 const Template: Story<DashboardProps> = args => <Dashboard {...args} />;
@@ -16,11 +18,6 @@ const tomorrow = '2021-08-02T11:15:00.000Z';
 
 export const Default = Template.bind({});
 Default.args = {
-  session: {
-    email: 'savio591@hotmail.com',
-    image: 'https://gdbrowser.com/icon/savio591&glow=0',
-    name: 'Savio Castelo',
-  },
   selectedDate: now,
   refDate: now,
   appointmentsData: [
@@ -87,3 +84,21 @@ NoAppointments.args = {
   appointmentsData: [],
   calendarData: { ...Default?.args?.calendarData, selectedDate: now },
 } as Args;
+
+// Mocking Next-auth
+Default.parameters = {
+  mockData: [
+    {
+      url: '/api/auth/session',
+      method: 'GET',
+      status: 200,
+      response: {
+        user: {
+          name: 'Super Mario',
+          isProvider: true,
+          // image: 'https://gdbrowser.com/icon/savio591',
+        },
+      },
+    },
+  ],
+};

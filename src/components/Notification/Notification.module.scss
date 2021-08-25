@@ -4,6 +4,27 @@
   width: fit-content;
 }
 
+.quantity {
+  background: var(--orange);
+  display: inline-block;
+  border-radius: 20px;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 0%; /* position the top  edge of the element at the middle of the parent */
+  left: 50%; /* position the left edge of the element at the middle of the parent */
+  transform: translateX(-100%) translateY(-50%);
+
+  color: #ffffff;
+  text-align: center;
+  font-family: 'Open Sans';
+  font-weight: bold;
+  font-style: normal;
+  font-size: 12px;
+  line-height: 20px;
+  user-select: none;
+}
+
 ul.notificationsList {
   position: absolute;
   list-style: none;
@@ -21,6 +42,7 @@ ul.notificationsList {
   border-radius: 10px;
   color: #626679;
   padding: 0;
+  box-shadow: 1px 1px 6px -1px rgba(0, 0, 0, 0.3);
 
   font-family: 'Poppins', sans-serif;
   font-style: normal;
@@ -60,4 +82,9 @@ ul.notificationsList {
       background: #eff1f9bb;
     }
   }
+}
+
+button.notification {
+  background: none;
+  border: none;
 }
