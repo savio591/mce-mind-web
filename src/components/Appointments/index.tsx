@@ -8,22 +8,17 @@ import styles from './Appointments.module.scss';
 export type AppointmentsData = {
   id: number;
   name: string;
-  date: string;
+  startDate: string;
   image?: string;
   phone?: string;
 }[];
 
-export type AppointmentsProps =
-  | {
-      appointmentsData?: AppointmentsData;
-      refDate?: string;
-      isLoading?: boolean;
-    }
-  | {
-      appointmentsData: AppointmentsData;
-      refDate: string;
-      isLoading: boolean;
-    };
+export interface AppointmentsProps {
+  appointmentsData?: AppointmentsData;
+  refDate?: string;
+  isLoading?: boolean;
+  selectedDate?: string;
+}
 
 interface AppointmentsAcc {
   morning: AppointmentsData;
@@ -36,6 +31,10 @@ export function Appointments({
   refDate,
   isLoading,
 }: AppointmentsProps): JSX.Element {
+  if (isLoading) {
+    return <Spinner height={56} count={4} circle />;
+  }
+
   if (
     appointmentsData === undefined ||
     appointmentsData === null ||
@@ -51,13 +50,16 @@ export function Appointments({
 
   const nextAppointmentNameIndex = closestIndexTo(
     new Date(refDate),
-    appointmentsData.map(item => new Date(item.date))
+    appointmentsData.map(item => new Date(item.startDate))
   );
   const nextAppointment = appointmentsData[nextAppointmentNameIndex];
 
+  const isToday =
+    nextAppointment.startDate.slice(0, 10) === refDate.slice(0, 10);
+
   const appointments = appointmentsData.reduce(
     (acc, current) => {
-      const hour = new Date(current.date).getHours();
+      const hour = new Date(current.startDate).getHours();
       if (hour <= 12) {
         return {
           ...acc,
@@ -87,26 +89,28 @@ export function Appointments({
 
   return !isLoading ? (
     <div className={styles.appointments}>
-      <div className={styles.nextAppointment}>
-        <h2>Próximo agendamento:</h2>
-        <Card
-          name={nextAppointment.name}
-          phone={nextAppointment.phone}
-          date={new Date(nextAppointment.date)}
-          image={nextAppointment.image}
-        />
-      </div>
-      {appointments.morning.length !== -1 && (
+      {isToday && (
+        <div className={styles.nextAppointment}>
+          <h2>Próximo agendamento:</h2>
+          <Card
+            name={nextAppointment.name}
+            phone={nextAppointment.phone}
+            date={new Date(nextAppointment.startDate)}
+            image={nextAppointment.image}
+          />
+        </div>
+      )}
+      {appointments.morning.length > 0 && (
         <div className={styles.section}>
           <h3>Manhã</h3>
           <ul className={styles.list}>
             {appointments.morning.map(appointment => (
-              <li key={appointment.date.toString()}>
+              <li key={appointment.startDate.toString()}>
                 <time>
                   <FaRegClock size={20} />
                   {new Intl.DateTimeFormat('pt-BR', {
                     timeStyle: 'short',
-                  }).format(new Date(appointment.date))}
+                  }).format(new Date(appointment.startDate))}
                 </time>
                 <Card
                   name={appointment.name}
@@ -118,17 +122,17 @@ export function Appointments({
           </ul>
         </div>
       )}
-      {appointments.afternoon.length !== -1 && (
+      {appointments.afternoon.length > 0 && (
         <div className={styles.section}>
           <h3>Tarde</h3>
           <ul className={styles.list}>
             {appointments.afternoon.map(appointment => (
-              <li key={appointment.date.toString()}>
+              <li key={appointment.startDate.toString()}>
                 <time>
                   <FaRegClock size={20} />
                   {new Intl.DateTimeFormat('pt-BR', {
                     timeStyle: 'short',
-                  }).format(new Date(appointment.date))}
+                  }).format(new Date(appointment.startDate))}
                 </time>
                 <Card
                   name={appointment.name}
@@ -140,17 +144,17 @@ export function Appointments({
           </ul>
         </div>
       )}
-      {appointments.night.length !== -1 && (
+      {appointments.night.length > 0 && (
         <div className={styles.section}>
           <h3>Noite</h3>
           <ul className={styles.list}>
             {appointments.night.map(appointment => (
-              <li key={appointment.date.toString()}>
+              <li key={appointment.startDate.toString()}>
                 <time>
                   <FaRegClock size={20} />
                   {new Intl.DateTimeFormat('pt-BR', {
                     timeStyle: 'short',
-                  }).format(new Date(appointment.date))}
+                  }).format(new Date(appointment.startDate))}
                 </time>
                 <Card
                   name={appointment.name}

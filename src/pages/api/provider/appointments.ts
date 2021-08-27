@@ -30,6 +30,7 @@ export default async function myClientAppointments(
   if (req.method === 'GET') {
     try {
       const { authorization } = req.headers;
+      const { date, all } = req.query;
 
       if (typeof authorization !== 'string') {
         res.status(400).end('Token not Found');
@@ -39,18 +40,43 @@ export default async function myClientAppointments(
       const secret = parseTokenAuth(authorization);
 
       const providers = await faunaClient(secret).query<FQLProviderData>(
-        q.Map(
-          q.Paginate(
-            q.Match(
-              q.Index('appointments_by_provider_ref_id'),
-              q.Select('id', q.CurrentIdentity())
+        date || all === 'true'
+          ? q.Map(
+              q.Paginate(
+                q.Match(
+                  q.Index('appointments_by_provider_ref_id_and_date'),
+                  q.Casefold(date.slice(0, 10)),
+                  q.Select('id', q.CurrentIdentity())
+                )
+              ),
+              q.Lambda('ref', q.Select('data', q.Get(q.Var('ref'))))
             )
-          ),
-          q.Lambda('ref', q.Select('data', q.Get(q.Var('ref'))))
+          : q.Map(
+              q.Paginate(
+                q.Match(
+                  q.Index('appointments_by_provider_ref_id'),
+                  q.Select('id', q.CurrentIdentity())
+                )
+              ),
+              q.Lambda('ref', q.Select('data', q.Get(q.Var('ref'))))
+            )
+      );
+
+      const calendarData = await faunaClient(secret).query(
+        q.Select(
+          'data',
+          q.Paginate(
+            q.Distinct(
+              q.Match(
+                q.Index('appointments_dates_by_provider_ref_id'),
+                q.Select('id', q.CurrentIdentity())
+              )
+            )
+          )
         )
       );
 
-      res.status(200).json(providers.data);
+      res.status(200).json({ appointmentsData: providers.data, calendarData });
 
       // it will block process cascading.
       return;

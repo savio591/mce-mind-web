@@ -1,26 +1,98 @@
+import { useCallback, useEffect, useState } from 'react';
+import { useSession } from 'next-auth/client';
 import Head from 'next/head';
 import { GetServerSideProps } from 'next';
 import { User } from 'next-auth';
-import { getSession } from 'next-auth/client';
+import { toast } from 'react-toastify';
+import Spinner from 'react-loading-skeleton';
 
-import { Notifications } from '../../components/Notifications';
-
-import styles from '../Dashboard.module.scss';
+import styles from './Dashboard.module.scss';
 import { SectionHeader } from '../../components/SectionHeader';
 import {
   SetAvailableWeeklyHour,
+  WeekDay,
   WeeksData,
 } from '../../components/SetAvailableWeeklyHour';
+import { Header } from '../../components/Header';
+import { api } from '../../services/api';
+import { WeekDayData } from '../../components/WeekDayPick';
 
+type Session = [session: { secret: string }, loading: boolean];
 export interface ProviderStatusProps {
   session: User;
   weeksData: WeeksData;
 }
 
-export default function ProviderStatus({
-  session,
-  weeksData,
-}: ProviderStatusProps): JSX.Element {
+interface ProviderStatusGetRequest {
+  id: string;
+  providerId: string;
+  name: string;
+  email: string;
+  phone: string;
+  isAvailable: boolean;
+  weeks: WeeksData;
+  startDate: string;
+  pauseStartDate: string;
+  pauseEndDate: string;
+  endDate: string;
+}
+
+export default function ProviderStatus(): JSX.Element {
+  const [session, loading] = useSession() as Session;
+  const [weeksData, setWeeksData] = useState<WeeksData>([] as WeeksData);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isAvailable, setIsAvailable] = useState<boolean | undefined>(
+    undefined
+  );
+  const allLoading = loading ?? isLoading;
+
+  const fetchAvailableData = useCallback(async (): Promise<void> => {
+    setIsLoading(true);
+    try {
+      if (!loading) {
+        const { data } = await api.get<ProviderStatusGetRequest>(
+          '/provider/set',
+          {
+            headers: { Authorization: `Bearer ${session.secret}` },
+          }
+        );
+        setWeeksData(data.weeks);
+        setIsAvailable(data.isAvailable);
+        setIsLoading(false);
+      } else return;
+    } catch {
+      toast.error('Erro ao verificar dados!');
+      setIsLoading(false);
+    }
+  }, [loading, session?.secret]);
+
+  useEffect(() => {
+    fetchAvailableData();
+  }, [fetchAvailableData]);
+
+  async function handleAvailableData(
+    week: WeekDay,
+    data: WeekDayData
+  ): Promise<void> {
+    try {
+      const newData = weeksData.map(item => {
+        if (week === item.weekDay) {
+          return { ...item, weekData: data };
+        }
+        return item;
+      });
+      await api.post<ProviderStatusGetRequest>(
+        '/provider/set',
+        { weeks: newData },
+        {
+          headers: { Authorization: `Bearer ${session?.secret}` },
+        }
+      );
+    } catch {
+      toast.error('Erro ao editar dsisponibilidade!');
+    }
+  }
+
   return (
     <>
       <Head>
@@ -29,29 +101,24 @@ export default function ProviderStatus({
         <link rel="image/png" href="/favicon.png" />
       </Head>
       <main className={styles.container}>
-        <header>
-          <Notifications
-            quantity={2}
-            notificationsData={[]}
-            align="right"
-            imageSrc={session?.image ?? ''}
-            name={session.name ?? ''}
-            onBlur={() => null}
-            onClick={() => null}
-            showNotifications={false}
-            title="Notificações"
-          />
-        </header>
+        <Header />
         <div className={styles.section}>
           <article>
             <SectionHeader
               title="Editar Disponibilidade"
               anchor={{
                 name: 'Voltar para Dashboard',
-                link: '../',
+                link: '/dashboard',
               }}
             />
-            <SetAvailableWeeklyHour serverWeeksData={weeksData} />
+            {allLoading ? (
+              <Spinner height={56} count={8} circle />
+            ) : (
+              <SetAvailableWeeklyHour
+                serverWeeksData={weeksData}
+                setRequestWeekData={handleAvailableData}
+              />
+            )}
           </article>
         </div>
       </main>
@@ -59,17 +126,8 @@ export default function ProviderStatus({
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async req => {
-  const session = await getSession(req);
-  if (!session?.user) {
-    return {
-      redirect: {
-        destination: `/`,
-      },
-      props: { message: 'Redirecionando para o Login' },
-    };
-  }
+export const getServerSideProps: GetServerSideProps = async () => {
   return {
-    props: { status: 200, session: session.user },
+    props: { status: 200, refDate: new Date().toISOString() },
   };
 };

@@ -1,10 +1,10 @@
 import { useSession } from 'next-auth/client';
+import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Spinner from 'react-loading-skeleton';
-import { useRouter } from 'next/router';
 import Avatar from 'react-avatar';
-import { Notification } from '../Notification';
 
+import { Notification } from '../Notification';
 import styles from './Header.module.scss';
 
 type Session = [
@@ -19,7 +19,7 @@ export interface HeaderProps {
 
 // eslint-disable-next-line no-empty-pattern
 export function Header({}: HeaderProps): JSX.Element {
-  const [session, loading] = useSession() as Session;
+  const [session, loading] = useSession();
   const router = useRouter();
 
   if (loading) {
