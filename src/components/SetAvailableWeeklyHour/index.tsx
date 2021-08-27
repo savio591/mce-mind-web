@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import styles from './SetAvailableWeeklyHour.module.scss';
 import { WeekDayData as WeekDataCallback, WeekDayPick } from '../WeekDayPick';
 
-type WeekDay =
+export type WeekDay =
   | 'sunday'
   | 'monday'
   | 'tuesday'
