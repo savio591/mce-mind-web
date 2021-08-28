@@ -111,6 +111,7 @@ export default function ProviderStatus(): JSX.Element {
                 link: '/dashboard',
               }}
             />
+            <pre>{isAvailable ? 'Disponível' : 'Não Disponível'}</pre>
             {allLoading ? (
               <Spinner height={56} count={8} circle />
             ) : (

@@ -36,6 +36,7 @@ export default function Home(): JSX.Element {
       if (!signindata?.ok) {
         throw new Error('errou');
       }
+      router.push('/dashboard');
       toast.dark('Autenticado com sucesso!', {
         position: 'top-right',
         autoClose: 3000,
@@ -45,7 +46,6 @@ export default function Home(): JSX.Element {
         draggable: true,
         progress: undefined,
       });
-      router.push('/dashboard');
     } catch (err) {
       toast.error('⚠️ Email e/ou senha inválido(a)', {
         position: 'top-right',
