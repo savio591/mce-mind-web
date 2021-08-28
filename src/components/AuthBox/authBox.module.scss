@@ -15,6 +15,18 @@ div.container {
     // background: #808080;
   }
 
+  & > button {
+    width: 100px;
+    height: 100px;
+    border-radius: 100px;
+    border: none;
+    background: #9f9f9f;
+    color: #ffffff;
+    font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
+    align-self: center;
+    font-size: 36px;
+  }
+
   & > img {
     margin: 0 auto;
     display: block;

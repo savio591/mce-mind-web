@@ -10,7 +10,7 @@ export default async function clientProfile(
   res: NextApiResponse
 ): Promise<void> {
   const isMethodAllowed = req.method === 'GET' || 'PUT';
-  const { email, name, phone, password } = req.body;
+  const { email, name, phone, image, password } = req.body;
 
   if (!isMethodAllowed) {
     res.setHeader('Allow', 'GET, POST, PUT');
@@ -61,7 +61,7 @@ export default async function clientProfile(
 
       const { data } = await faunaClient(secret).query<{ data: unknown }>(
         q.Update(q.CurrentIdentity(), {
-          data: { email, name, phone },
+          data: { email, name, phone, image },
           credentials: { password },
         })
       );

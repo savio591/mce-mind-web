@@ -49,6 +49,7 @@ export const validateUpdateProfile = (data: Schema): Promise<boolean> =>
     .object()
     .shape({
       name: yup.string(),
+      image: yup.string(),
       email: yup.string().email(),
       password: yup
         .string()
