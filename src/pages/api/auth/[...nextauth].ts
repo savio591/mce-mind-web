@@ -2,8 +2,8 @@
 import { query as q } from 'faunadb';
 import NextAuth, { User } from 'next-auth';
 import Providers from 'next-auth/providers';
-import { api } from '../../../services/api';
-import { fql } from '../../../services/fauna';
+import { api } from '../_lib/api';
+import { fql } from '../_lib/fauna';
 
 interface CredentialsProps {
   email: string;
@@ -22,11 +22,6 @@ interface CredentialsProps {
 export default NextAuth({
   // Configure one or more authentication providers
   providers: [
-    Providers.GitHub({
-      clientId: process.env.GITHUB_ID,
-      clientSecret: process.env.GITHUB_SECRET,
-      scope: 'read:user',
-    }),
     Providers.Credentials({
       name: 'Credentials',
       credentials: {

@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { query as q } from 'faunadb';
 
-import { fql } from '../../services/fauna';
+import { fql } from './_lib/fauna';
 import { validateAuth } from '../../utils/validateInputs';
 
 interface FQLLoginResponse {

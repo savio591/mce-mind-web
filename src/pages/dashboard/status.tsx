@@ -70,28 +70,28 @@ export default function ProviderStatus(): JSX.Element {
     fetchAvailableData();
   }, [fetchAvailableData]);
 
-  async function handleAvailableData(
-    week: WeekDay,
-    data: WeekDayData
-  ): Promise<void> {
-    try {
-      const newData = weeksData.map(item => {
-        if (week === item.weekDay) {
-          return { ...item, weekData: data };
-        }
-        return item;
-      });
-      await api.post<ProviderStatusGetRequest>(
-        '/provider/set',
-        { weeks: newData },
-        {
-          headers: { Authorization: `Bearer ${session?.secret}` },
-        }
-      );
-    } catch {
-      toast.error('Erro ao editar dsisponibilidade!');
-    }
-  }
+  const handleAvailableData = useCallback(
+    async (week: WeekDay, data: WeekDayData): Promise<void> => {
+      try {
+        const newData = weeksData.map(item => {
+          if (week === item.weekDay) {
+            return { ...item, weekData: data };
+          }
+          return item;
+        });
+        await api.post<ProviderStatusGetRequest>(
+          '/provider/set',
+          { weeks: newData },
+          {
+            headers: { Authorization: `Bearer ${session?.secret}` },
+          }
+        );
+      } catch {
+        toast.error('Erro ao editar dsisponibilidade!');
+      }
+    },
+    [session?.secret, weeksData]
+  );
 
   return (
     <>

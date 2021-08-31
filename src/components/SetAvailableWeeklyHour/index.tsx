@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import styles from './SetAvailableWeeklyHour.module.scss';
 import { WeekDayData as WeekDataCallback, WeekDayPick } from '../WeekDayPick';
 
@@ -35,11 +35,14 @@ export function SetAvailableWeeklyHour({
     setWeeksData(serverWeeksData);
   }, [serverWeeksData]);
 
-  function handleWeekData(weekDay: WeekDay, data: WeekDataCallback): void {
-    if (setRequestWeekData) {
-      setRequestWeekData(weekDay, data);
-    }
-  }
+  const handleWeekData = useCallback(
+    (weekDay: WeekDay, data: WeekDataCallback): void => {
+      if (setRequestWeekData) {
+        setRequestWeekData(weekDay, data);
+      }
+    },
+    [setRequestWeekData]
+  );
 
   return (
     <ul className={styles.container}>

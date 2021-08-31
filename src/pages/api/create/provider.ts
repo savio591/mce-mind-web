@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { query as q } from 'faunadb';
 
-import { fql } from '../../../services/fauna';
+import { fql } from '../_lib/fauna';
 import { validateCreateProvider } from '../../../utils/validateInputs';
 
 // ! Be careful with double server Response, test and threat all

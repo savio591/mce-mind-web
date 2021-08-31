@@ -1,5 +1,6 @@
 import { useSession } from 'next-auth/client';
 import { useRouter } from 'next/router';
+import { useRef } from 'react';
 import { ChangeEvent, useEffect } from 'react';
 import { FormEvent, useState } from 'react';
 import Avatar from 'react-avatar';
@@ -43,6 +44,8 @@ export default function Profile(): JSX.Element {
   // const [oldPassword, setOldPassword] = useState('');
   const [disableButton, setDisableButton] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState('');
+
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [session, loading] = useSession() as Session;
   const router = useRouter();
 
@@ -163,18 +166,28 @@ export default function Profile(): JSX.Element {
   return (
     <div className={styles.container}>
       <AuthBox>
-        <h1>Editar perfil</h1>
+        <div className={styles.header}>
+          <h1>Editar perfil</h1>
+        </div>
         <input
           onChange={handleUploadPhoto}
           type="file"
           accept="image/png, image/jpeg"
+          ref={fileInputRef}
+          hidden
         />
-        <button type="button">
+        <button
+          type="button"
+          onClick={() => {
+            fileInputRef.current?.click();
+          }}
+        >
           <Avatar
             name={(name || session?.user?.name) ?? ''}
             src={image}
-            style={{ borderRadius: 100 }}
-            unstyled
+            // style={{ borderRadius: 100 }}
+            round
+            // unstyled
           />
           <div style={{ width: 1, height: 1, backgroundColor: '#000000' }} />
         </button>

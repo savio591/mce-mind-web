@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import DayPicker, { DayModifiers } from 'react-day-picker';
 
 export type CalendarProps =
@@ -27,18 +27,21 @@ export function Calendar({
     setSelectedDatePick(selectedDate ?? '');
   }, [selectedDate]);
 
+  const handleDateChange = useCallback(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    (day: Date, modifiers: DayModifiers): void => {
+      // if (modifiers.available) {
+      setSelectedDatePick(day.toISOString());
+      if (onSelectDate) {
+        onSelectDate(day.toISOString());
+      }
+      // }
+    },
+    [onSelectDate]
+  );
+
   if (!selectedDate || !refDate) {
     return <h1>Falha ao renderizar calendário</h1>;
-  }
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  function handleDateChange(day: Date, modifiers: DayModifiers): void {
-    // if (modifiers.available) {
-    setSelectedDatePick(day.toISOString());
-    if (onSelectDate) {
-      onSelectDate(day.toISOString());
-    }
-    // }
   }
 
   return (
