@@ -2,9 +2,20 @@
   width: 100%;
   min-height: 100vh;
   background-image: var(--background);
+  padding: 1rem;
 
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  @media (max-width: 475px) {
+    padding: 0;
+  }
+}
+
+.header {
+  display: flex;
+  gap: 24px;
+  align-items: center;
 }

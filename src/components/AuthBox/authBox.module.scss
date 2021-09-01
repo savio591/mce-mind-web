@@ -6,8 +6,14 @@ div.container {
   background: #ffffff;
   border-radius: 1rem;
   padding: 4.5rem;
+  box-shadow: 1px 1px 6px -1px rgba(0, 0, 0, 0.3);
 
   gap: 2rem;
+
+  @media (max-width: 475px) {
+    box-shadow: none;
+    padding: 2.25rem;
+  }
 
   &[data-is-testing='true'] {
     margin: 0 auto;

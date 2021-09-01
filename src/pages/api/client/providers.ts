@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { query as q } from 'faunadb';
 
-import { faunaClient } from '../../../services/fauna-js';
+import { faunaClient } from '../_lib/fauna-js';
 import { parseTokenAuth } from '../../../utils/parseTokenAuth';
 
 interface FQLProvidersData {
@@ -49,7 +49,7 @@ export default async function clientProfile(
       // it will block process cascading.
       return;
     } catch (err) {
-      res.status(404).json({ error: err.description });
+      res.status(404).json({ error: 'Error on fetch providers' });
     }
   }
 }

@@ -39,7 +39,7 @@ export default function Dashboard({
   const fetchAppointments = useCallback(async (): Promise<void> => {
     setIsLoading(true);
     try {
-      if (!loading) {
+      if (!loading && session) {
         const { data } = await api.get(
           `/provider/appointments${
             selectedDate ? `?date=${selectedDate}` : ''
@@ -56,12 +56,20 @@ export default function Dashboard({
       toast.error('Erro ao obter agendamentos!');
       setIsLoading(false);
     }
-  }, [loading, session?.secret, selectedDate]);
+  }, [loading, session, selectedDate]);
 
   useEffect(() => {
     fetchAppointments();
   }, [fetchAppointments]);
 
+  if (loading) {
+    return <pre>Carregando...</pre>;
+  }
+
+  if (!loading && !session) {
+    router.push('/');
+    return <pre>Não logado</pre>;
+  }
   async function handleSelectDateFromCalendar(date?: string): Promise<void> {
     if (date && session?.secret) {
       router.push({ query: { date } });

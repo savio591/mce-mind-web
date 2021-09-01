@@ -62,16 +62,8 @@ export default function SignUp(): JSX.Element {
         progress: undefined,
       } as ToastOptions;
 
-      if (err.response.data.error === 'User already exists!') {
-        toast.error(
-          '⚠️ Essa conta já existe, tente fazer login.',
-          toastOptions
-        );
-        return;
-      }
-
       toast.error(
-        '⚠️ Algo de errado aconteceu. Tente novamente em alguns segundos.',
+        '⚠️ Email e/ou Senha inválido, tente novamente!.',
         toastOptions
       );
 
@@ -109,8 +101,8 @@ export default function SignUp(): JSX.Element {
               value={name}
               label="name"
               pattern="^([a-zA-Zâãêiouç]{1,}\s[a-zA-Zâãêiouç]{1,}'?-?[a-zA-Zâãêiouç]{1,}\s?([a-zA-Zâãêiouç]{1,})?)"
-              autoFocus
               required
+              autoFocus
               type="text"
             />
             <Input
@@ -127,7 +119,6 @@ export default function SignUp(): JSX.Element {
               maxLength={15}
               value={phone}
               label="phone"
-              autoFocus
               required
               type="tel"
             />
@@ -146,7 +137,6 @@ export default function SignUp(): JSX.Element {
               inputFontSize="16"
               value={email}
               label="Email"
-              autoFocus
               required
               type="email"
             />

@@ -1,8 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { Expr, query as q } from 'faunadb';
 
-import { faunaClient } from '../../../services/fauna-js';
+import { faunaClient } from '../_lib/fauna-js';
 import { parseTokenAuth } from '../../../utils/parseTokenAuth';
+import { weeksPreset } from '../../../constants/weeksPreset';
 
 interface FQLProvidersData {
   data: {
@@ -126,7 +127,7 @@ export default async function setProviderAvailability(
                 email,
                 phone,
                 isAvailable,
-                weeks,
+                weeks: weeksPreset,
                 startDate: '1970-01-01T11:00:00.000Z',
                 pauseStartDate: '1970-01-01T13:00:00.000Z',
                 pauseEndDate: '1970-01-01T14:00:00.000Z',
@@ -142,7 +143,7 @@ export default async function setProviderAvailability(
       // it will block process cascading.
       return;
     } catch (err) {
-      res.status(404).json({ error: err.description });
+      res.status(404).json({ error: 'error on set provider data' });
     }
   }
 }

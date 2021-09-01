@@ -2,12 +2,20 @@
 import { query as q } from 'faunadb';
 import NextAuth, { User } from 'next-auth';
 import Providers from 'next-auth/providers';
+import { faunaClient } from '../_lib/fauna-js';
 import { api } from '../_lib/api';
 import { fql } from '../_lib/fauna';
 
 interface CredentialsProps {
   email: string;
   password: string;
+}
+
+interface FQLLoginResponse {
+  secret: string;
+  instance: {
+    id: string;
+  };
 }
 
 // interface SessionUserData extends Session {
@@ -33,15 +41,27 @@ export default NextAuth({
         try {
           const { email, password } = credentials;
 
-          const auth = await api.post<{ secret: string }>('signin', {
-            email,
-            password,
-          });
+          // const auth = await api.post<{ secret: string }>('signin', {
+          //   email,
+          //   password,
+          // });
 
-          const { secret } = auth.data;
+          const { secret } = await fql.query<FQLLoginResponse>(
+            q.Login(q.Match(q.Index('user_by_email'), q.Casefold(email)), {
+              password,
+            })
+          );
+          // const { secret } = auth.data;
+
+          const response = await faunaClient(secret).query<{
+            data: { isProvider: boolean };
+          }>(q.Get(q.CurrentIdentity()));
+          if (!response.data.isProvider) {
+            throw new Error('This account is a provider type');
+          }
 
           return { name: secret };
-        } catch (err) {
+        } catch {
           return null;
         }
       },

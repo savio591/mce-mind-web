@@ -4,6 +4,7 @@ import { useRef } from 'react';
 import { ChangeEvent, useEffect } from 'react';
 import { FormEvent, useState } from 'react';
 import Avatar from 'react-avatar';
+import { FaChevronLeft } from 'react-icons/fa';
 import { toast, ToastOptions } from 'react-toastify';
 
 import { AuthBox } from '../components/AuthBox';
@@ -144,18 +145,7 @@ export default function Profile(): JSX.Element {
         progress: undefined,
       } as ToastOptions;
 
-      if (err.response.data.error === 'User already exists!') {
-        toast.error(
-          '⚠️ Essa conta já existe, tente fazer login.',
-          toastOptions
-        );
-        return;
-      }
-
-      toast.error(
-        '⚠️ Algo de errado aconteceu. Tente novamente em alguns segundos.',
-        toastOptions
-      );
+      toast.error('⚠️ Essa conta já existe, tente fazer login.', toastOptions);
 
       // setEmail('');
       setPassword('');
@@ -167,6 +157,13 @@ export default function Profile(): JSX.Element {
     <div className={styles.container}>
       <AuthBox>
         <div className={styles.header}>
+          <FaChevronLeft
+            onClick={() => {
+              router.back();
+            }}
+            style={{ cursor: 'pointer' }}
+            size={20}
+          />
           <h1>Editar perfil</h1>
         </div>
         <input

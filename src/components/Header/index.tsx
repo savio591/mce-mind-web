@@ -1,5 +1,6 @@
-import { useSession } from 'next-auth/client';
+import { signOut, useSession } from 'next-auth/client';
 import { useRouter } from 'next/router';
+import { FiLogOut } from 'react-icons/fi';
 import Link from 'next/link';
 import Spinner from 'react-loading-skeleton';
 import Avatar from 'react-avatar';
@@ -36,7 +37,9 @@ export function Header({}: HeaderProps): JSX.Element {
 
   return (
     <header className={styles.container}>
-      <Notification data={[{ name: 'Ai' }, { name: 'Dentro' }]} />
+      <Notification
+        data={[{ name: 'Sistema de notificações disponível em breve!' }]}
+      />
       <div
         style={{
           width: 0,
@@ -63,6 +66,22 @@ export function Header({}: HeaderProps): JSX.Element {
           handleAvatarClick();
         }}
       />
+      <div
+        style={{
+          width: 0,
+          height: 40,
+          borderRight: '1px solid #fafafa',
+        }}
+      />
+      <button
+        style={{ border: 'none', background: 'none' }}
+        type="button"
+        onClick={() => {
+          signOut();
+        }}
+      >
+        <FiLogOut size={24} strokeWidth={2.5} color="#3f4254" />
+      </button>
     </header>
   );
 }

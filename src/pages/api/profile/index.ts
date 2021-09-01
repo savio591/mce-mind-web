@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { query as q } from 'faunadb';
 
-import { faunaClient } from '../../../services/fauna-js';
+import { faunaClient } from '../_lib/fauna-js';
 import { parseTokenAuth } from '../../../utils/parseTokenAuth';
 import { validateUpdateProfile } from '../../../utils/validateInputs';
 
