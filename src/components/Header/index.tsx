@@ -1,12 +1,15 @@
+import { useMemo, useState, useCallback, useEffect } from 'react';
 import { signOut, useSession } from 'next-auth/client';
-import { useRouter } from 'next/router';
+import { format, parseISO } from 'date-fns';
 import { FiLogOut } from 'react-icons/fi';
+import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Spinner from 'react-loading-skeleton';
 import Avatar from 'react-avatar';
 
 import { Notification } from '../Notification';
 import styles from './Header.module.scss';
+import { api } from '../../services/api';
 
 type Session = [
   session: { user?: { email: string; name: string; image?: string | null } },
@@ -18,10 +21,40 @@ export interface HeaderProps {
   session?: Session[0];
 }
 
+export type NotificationsData = { clientName: string; startDate: string }[];
+
 // eslint-disable-next-line no-empty-pattern
 export function Header({}: HeaderProps): JSX.Element {
   const [session, loading] = useSession();
   const router = useRouter();
+  const [notifications, setNotifications] = useState<NotificationsData>(
+    [] as NotificationsData
+  );
+  const formattedNotifications = useMemo(
+    () =>
+      notifications.map(item => ({
+        name: `${item.clientName} marcou um agendamento para às ${format(
+          parseISO(item.startDate),
+          "hh'h'mm' no dia 'dd/MM"
+        )}`,
+      })),
+    [notifications]
+  );
+  const fetchNotifications = useCallback(async () => {
+    if (session && !loading) {
+      try {
+        const response = await api.get('notifications', {
+          headers: { Authorization: `Bearer ${session?.secret}` },
+        });
+        setNotifications(response.data);
+        // eslint-disable-next-line no-empty
+      } catch {}
+    }
+  }, [loading, session]);
+
+  useEffect(() => {
+    fetchNotifications();
+  }, [fetchNotifications]);
 
   if (loading) {
     return (
@@ -38,7 +71,11 @@ export function Header({}: HeaderProps): JSX.Element {
   return (
     <header className={styles.container}>
       <Notification
-        data={[{ name: 'Sistema de notificações disponível em breve!' }]}
+        data={
+          formattedNotifications ?? [
+            { name: 'Sistema de notificações disponível em breve!' },
+          ]
+        }
       />
       <div
         style={{
