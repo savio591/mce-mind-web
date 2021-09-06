@@ -1,8 +1,21 @@
-![image](https://user-images.githubusercontent.com/3879613/125519551-d46b63ee-50c5-4ead-be19-a911043df2a6.png)
+<a href="https://mindconsulting.com.br/education/"><img src="https://user-images.githubusercontent.com/3879613/125519551-d46b63ee-50c5-4ead-be19-a911043df2a6.png" /></a>
 
+![jest](https://github.com/savio591/mce-mind-web/actions/workflows/jest.yml/badge.svg?branch=dev)
+![codequality](https://github.com/savio591/mce-mind-web/actions/workflows/codeInspector.yml/badge.svg?branch=dev)
 [![wakatime](https://wakatime.com/badge/github/savio591/mce-mind-web.svg)](https://wakatime.com/badge/github/savio591/mce-mind-web)
 
+[![typescript](https://badgen.net/badge/icon/typescript?icon=typescript&label)](https://www.typescriptlang.org/)
+[![codestyle-airbnb](https://badgen.net/badge/code%20style/airbnb/f2a?icon=github)](https://github.com/airbnb/javascript)
+
+![Next JS](https://img.shields.io/badge/Next-black?logo=next.js&logoColor=white)
+![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?logo=vercel&logoColor=white)
+[![Storybook](https://cdn.jsdelivr.net/gh/storybookjs/brand@main/badge/badge-storybook.svg)](https://www.chromatic.com/library?appId=60f032ec31643a003b29def3)
+![SASS](https://img.shields.io/badge/SASS-hotpink.svg?logo=SASS&logoColor=white)
+[![mce](https://badgen.net/badge/icon/mind%20coding%20experience/red?icon=https://savilexperiments.com.br/assets/mce-icon-12px.svg&label)](https://conteudos.provi.com.br/mind-coding-experience/)
+
+
 ⚠️ **Projeto em construção! Clique [aqui](https://github.com/savio591/mce-mind-web/tree/dev) para ir à branch de desenvolvimento** ⚠️
+
 # MCE - Case 2 - Plataforma de agendamento para personal trainers
 
 Segundo case do programa [Mind Coding Experience(MCE)](https://conteudos.provi.com.br/mind-coding-experience/), feito pela [Mind Consulting](https://mindconsulting.com.br/) em parceria com a fintech [Provi](https://provi.com.br), com o intuito de evoluir as habilidades técnicas participando de projetos e recebendo acompanhamento de profissionais do mercado.
@@ -36,41 +49,41 @@ Os dados necessários para realizar o cadastro dos usuários são:
 
 ### Sistema agendamento:
 
-O sistema de agendamento torna possível que o usuários agendem horários e que os personais verifiquem os horários que foram agendados. 
+O sistema de agendamento torna possível que o usuários agendem horários e que os personais verifiquem os horários que foram agendados.
 
-**Para usuários:** O usuários após terem efetuado o login poderão agendar os horários, para isso deverão selecionar o dá e o horário disponível, e enfim confirmar o agendamento. Também haverá uma listagem com todos os horários que ele tem agendado. 
+**Para usuários:** O usuários após terem efetuado o login poderão agendar os horários, para isso deverão selecionar o dá e o horário disponível, e enfim confirmar o agendamento. Também haverá uma listagem com todos os horários que ele tem agendado.
 
-**Para os personais:** Os personais poderão verificar os horários que foram agendados, através do dashboard administrativo. 
+**Para os personais:** Os personais poderão verificar os horários que foram agendados, através do dashboard administrativo.
 
-**Status:** Reservado e Agendado É necessário deixar indicado que foi agendado o horário em especifico Os horários de trabalhos dos personais se iniciam as 8 h e finalizam as 20:00h, com uma pausa para o almoço de 1 hora ao 12:00h 
+**Status:** Reservado e Agendado É necessário deixar indicado que foi agendado o horário em especifico Os horários de trabalhos dos personais se iniciam as 8 h e finalizam as 20:00h, com uma pausa para o almoço de 1 hora ao 12:00h
 
 ### Desenvolvimento dashboard:
 
-O dashboard administrativo poderá ser acessado pelo personais e pelas academias. Esse permitirá a visualização e controle das informações relacionadas aos agendamentos 
+O dashboard administrativo poderá ser acessado pelo personais e pelas academias. Esse permitirá a visualização e controle das informações relacionadas aos agendamentos
 
 ### Sistema de perfil:
 
-Os usuários poderão editar seus respectivos perfis, através do aplicativo, conseguindo alterar, seu nome, email, senha e foto 
+Os usuários poderão editar seus respectivos perfis, através do aplicativo, conseguindo alterar, seu nome, email, senha e foto
 
 ### Níveis de acesso:
 
-Os viveis de acesso farão a diferenciação entre os personais e alunos. Sendo que: Os alunos: Conseguirão agendar horários com os personais disponibilizadas no sistema, através do aplicativo Os personais: Poderão verificar Através do dasboard administraitvo e app, os horarários que forces agendados 
+Os viveis de acesso farão a diferenciação entre os personais e alunos. Sendo que: Os alunos: Conseguirão agendar horários com os personais disponibilizadas no sistema, através do aplicativo Os personais: Poderão verificar Através do dasboard administraitvo e app, os horarários que forces agendados
 
 ### Dashboard:
 
-O dashboard permitirá apenas o controle dos agendamentos pelo login dos personais Deve ser constituido de duas abas 
+O dashboard permitirá apenas o controle dos agendamentos pelo login dos personais Deve ser constituido de duas abas
 * Agendamentos
 * Perfil
 
 ### APP:
 
-O aplicativo permitirá os agendamentos dos usuários, e a visualização dos agendamentos por parte dos personais. 
+O aplicativo permitirá os agendamentos dos usuários, e a visualização dos agendamentos por parte dos personais.
 
-Todos os usuários cadastrados pelo APP terão nível de acesso de alunos 
+Todos os usuários cadastrados pelo APP terão nível de acesso de alunos
 
 ### Sistema de notificação:
 
-O sistema de notificação será necessário para toda vez que um aluno agendar oro horário, o personal que teve o horário agendado recebe uma notificação, alertando que o horário foi agendado e informações referente ao aluno que agendou. 
+O sistema de notificação será necessário para toda vez que um aluno agendar oro horário, o personal que teve o horário agendado recebe uma notificação, alertando que o horário foi agendado e informações referente ao aluno que agendou.
 
 * Agendamentos
 * Perfil

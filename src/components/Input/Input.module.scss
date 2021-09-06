@@ -1,0 +1,120 @@
+$background: #f9f9fb;
+$background-dark: #402e46;
+$background-press: #f0f0f8;
+$text-placeholder-small: #a3a3a3;
+$text-placeholder: #cacacc;
+
+.container {
+  position: relative;
+}
+
+.input {
+  background: $background;
+  height: 65px;
+  border-radius: 12px;
+  outline: none;
+  border: none;
+  padding: 0 3rem 0 1rem;
+  width: 100%;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 21px;
+  border: 1px solid transparent;
+  transition: background 0.1s, border 0.3s;
+
+  &::placeholder {
+    color: $text-placeholder;
+  }
+
+  &:active {
+    background: $background-press;
+  }
+
+  &[data-font-size='14'] {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+
+    &::placeholder {
+      color: $text-placeholder-small;
+    }
+  }
+
+  &[required] {
+    &:valid {
+      border: 1px solid green;
+    }
+    &:invalid {
+      border: 1px solid red;
+    }
+  }
+
+  &[data-theme='dark'] {
+    background-color: $background-dark;
+    border: none !important;
+    color: #ffffff;
+
+    &::placeholder {
+      color: #ffffff;
+    }
+  }
+}
+
+.requiredIndicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 50%; /* position the top  edge of the element at the middle of the parent */
+  right: 1rem;
+  transform: translateY(-50%);
+  // margin-right: 1rem;
+  border-radius: 100px;
+  color: transparent;
+  background-color: transparent;
+  transition: color 0.2s, background 0.2s;
+}
+
+// indicator styling based on input conditions
+.input:invalid + .requiredIndicator {
+  color: transparent;
+  background-color: transparent;
+}
+
+.input:valid + .requiredIndicator {
+  color: $background-dark;
+  background-color: #fff;
+}
+
+.passwordButton {
+  position: absolute;
+  top: 50%; /* position the top  edge of the element at the middle of the parent */
+  right: 0;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  color: $text-placeholder;
+  padding: 1.25rem;
+
+  &[data-theme='dark'] {
+    width: 20px;
+    height: 20px;
+    line-height: 0;
+    margin-right: 1rem;
+    padding: 0;
+    border-radius: 100px;
+    color: $background-dark;
+    background-color: white;
+    transition: border 0.2s;
+
+    &:hover {
+      color: #312036;
+
+      &:active {
+        border: 1px solid white;
+      }
+    }
+  }
+}

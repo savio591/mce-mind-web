@@ -1,0 +1,51 @@
+.container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+  z-index: 1000;
+
+  @media (max-width: 380px) {
+    gap: 0.5rem;
+  }
+
+  .profileAnchor {
+    a,
+    p {
+      text-align: right;
+    }
+
+    a {
+      font-family: 'Montserrat', sans-serif;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 18px;
+      line-height: 22px;
+      color: #3f4254;
+
+      &:hover {
+        text-decoration-line: underline;
+      }
+
+      @media (max-width: 380px) {
+        font-size: 16px;
+        line-height: 20px;
+      }
+    }
+
+    p {
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 21px;
+      color: #626679;
+      // text-decoration-line: underline;
+
+      @media (max-width: 358px) {
+        display: none;
+      }
+    }
+  }
+}

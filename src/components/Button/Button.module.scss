@@ -1,0 +1,110 @@
+$orange500: #fea051;
+$orange400: #e68231;
+$orange300: #db7826;
+
+.button {
+  display: block;
+  width: 100%;
+  max-width: 640px;
+  margin: auto;
+  height: 64px;
+  border-radius: 14px;
+  border: none;
+  outline: none;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 31px;
+  text-align: center;
+  color: #ffffff;
+  background-color: $orange500;
+  transition: background 0.2s;
+
+  &:hover {
+    background: $orange400;
+
+    &:active {
+      background: $orange300;
+    }
+  }
+
+  &[data-style='outline'] {
+    background: transparent;
+    border: 2px solid $orange500;
+    color: $orange500;
+    transition: color 0.2s, border 0.2s;
+
+    &:hover {
+      border: 2px solid $orange400;
+      color: $orange400;
+
+      &:active {
+        background: transparent;
+        border: 2px solid $orange300;
+        color: $orange300;
+      }
+    }
+
+    &[disabled] {
+      cursor: wait;
+
+      &:hover,
+      &:active {
+        background: transparent;
+        border: 2px solid $orange500;
+        color: $orange500;
+      }
+    }
+  }
+
+  &[data-size='small'] {
+    width: auto;
+    margin: 0;
+    padding: 0 10px;
+    height: 40px;
+    font-style: normal;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+
+    &[data-style='outline'] {
+      padding: 0 1rem;
+    }
+  }
+
+  &[disabled] {
+    cursor: wait;
+    &:hover {
+      background: $orange500;
+
+      &:active {
+        background: $orange500;
+      }
+    }
+  }
+
+  &[data-style='circle'] {
+    width: 85px;
+    margin: 0;
+    height: 85px;
+    padding: 1rem;
+    color: white;
+    border-radius: 100px;
+    line-height: 0;
+
+    &[data-size='small'] {
+      width: 72px;
+      height: 72px;
+    }
+  }
+  &[data-style='circle-outline'] {
+    color: $orange500;
+    transition: color 0.2s, border 0.2s;
+
+    &:hover {
+      color: $orange400;
+
+      &:active {
+        color: $orange300;
+      }
+    }
+  }
+}

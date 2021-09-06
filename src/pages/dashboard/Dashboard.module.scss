@@ -1,0 +1,39 @@
+.container {
+  display: flex;
+  flex-direction: column;
+
+  header {
+    padding: 2.25rem 2rem;
+  }
+
+  .section {
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-self: center;
+    gap: 2rem;
+
+    article {
+      width: 100%;
+
+      // appointments component element
+      div + div,
+      & > h1 {
+        margin-top: 2rem;
+
+        @media (max-width: 568px) {
+          font-size: 1.5rem;
+        }
+      }
+    }
+
+    aside {
+      flex-shrink: 1;
+
+      @media (max-width: 960px) {
+        display: none;
+      }
+    }
+  }
+}
