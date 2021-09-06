@@ -10,6 +10,8 @@ interface FQLProvidersData {
     email: string;
     phone: string;
     isAvailable: true;
+    providerId: string;
+    clientId: string;
   };
   ref: {
     id: string;
@@ -39,7 +41,7 @@ export default async function clientProfile(
 
       const secret = parseTokenAuth(authorization);
 
-      const { data: response } = await faunaClient(
+      const { data: appointment } = await faunaClient(
         secret
       ).query<FQLProvidersData>(
         q.Map(
@@ -49,11 +51,11 @@ export default async function clientProfile(
               q.Select('id', q.CurrentIdentity())
             )
           ),
-          q.Lambda('ref', q.Select('data', q.Get(q.Var('ref'))))
+          q.Lambda('clientRef', q.Select('data', q.Get(q.Var('clientRef'))))
         )
       );
 
-      res.status(200).json(response);
+      res.status(200).json(appointment);
 
       // it will block process cascading.
       return;
@@ -74,6 +76,19 @@ export default async function clientProfile(
 
       const secret = parseTokenAuth(authorization);
 
+      const provider = await faunaClient(secret).query<{
+        name: string;
+        phone: string;
+        email: string;
+      }>(
+        q.Select(
+          'data',
+          q.Get(
+            q.Match(q.Index('provider_status_by_provider_ref_id'), providerId)
+          )
+        )
+      );
+
       const {
         data: { name, email, phone },
         ref: { id: clientId },
@@ -91,9 +106,27 @@ export default async function clientProfile(
             clientId,
             startDate,
             endDate,
+            clientName: provider.name,
+            clientPhone: provider.phone,
+            clientEmail: provider.email,
             name,
             email,
             phone,
+          },
+        })
+      );
+
+      // it will sends a notification to the provider
+      await faunaClient(secret).query(
+        q.Create(q.Collection('notifications'), {
+          data: {
+            id: q.NewId(),
+            providerId,
+            clientId,
+            clientName: name,
+            startDate,
+            endDate,
+            isViewed: false,
           },
         })
       );
@@ -102,7 +135,7 @@ export default async function clientProfile(
 
       // it will block process cascading.
       return;
-    } catch (err) {
+    } catch {
       res.status(404).json({ error: 'Error on fetch data' });
     }
   }

@@ -53,7 +53,7 @@ export default async function createClient(
       return;
     }
 
-    res.status(200).json({ message: 'User was created with success' });
+    res.status(201).json({ message: 'User was created with success' });
     return;
   }
 
