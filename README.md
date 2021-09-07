@@ -19,11 +19,11 @@
 
 # MCE - Case 2 - Plataforma de agendamento para personal trainers
 
-Segundo case do programa [Mind Coding Experience(MCE)](https://conteudos.provi.com.br/mind-coding-experience/), que está sendo feito pela [Mind Consulting] em parceria com a fintech [Provi], com o intuito de evoluir as habilidades técnicas participando de projetos e recebendo acompanhamento de profissionais do mercado.
+Segundo case do programa [Mind Coding Experience(MCE)](https://conteudos.provi.com.br/mind-coding-experience/), que está oferecido pela [Mind Consulting] em parceria com a fintech [Provi], com o intuito de evoluir as habilidades técnicas participando de projetos e recebendo acompanhamento de profissionais do mercado.
 
 ## Tecnologias utilizadas:
 
-### Front-end web:
+### Web front-end/back-end(serverless/lambda):
 
 - Server-Side-Rendering com Next.js/React.js,
 - Static Site Generation com Next.js/React.js,
@@ -35,6 +35,12 @@ Segundo case do programa [Mind Coding Experience(MCE)](https://conteudos.provi.c
 - Axios(api),
 - SCSS(SASS),
 - Typescript.
+
+## Links do projeto:
+
+* Front-end web: [Página](https://mce-mind.vercel.app) - [Repositório](https://github.com/savio591/mce-mind-web)
+* Processo(Kanban/Sprint): [MVP](https://github.com/savio591/mce-mind-web/projects)
+* Protótipo: [Figma](https://www.figma.com/file/Do8ydMHuP0ZDrDJdWwd0UP/MCE-GYM-Savils-Version?node-id=167%3A164)
 
 ## A proposta-desafio do _Product Owner_:
 
@@ -107,14 +113,16 @@ O sistema de notificação será necessário para toda vez que um aluno agendar 
 * Agendamentos
 * Perfil
 
-## Links do projeto:
-
-* Protótipo: [Figma](https://www.figma.com/file/9HhQUDxESVIvBC0tJJszt8/Case-MCE?node-id=0%3A1?)
-
-* Front-end web: [Página](https://mce-mind.vercel.app) - [Repositório](https://github.com/savio591/mce-mind-web)
+### Screenshots:
+![image](https://user-images.githubusercontent.com/3879613/132274248-a6132d35-7097-4a42-a7ee-e8270ac1781d.png)
+![image](https://user-images.githubusercontent.com/3879613/132274377-458c3688-aa23-412a-a6b8-c30d6b6d39d7.png)
+![image](https://user-images.githubusercontent.com/3879613/132274473-e92beeb0-8ddf-471d-9d88-2c334f09713b.png)
 
 ## Requisitos para o desenvolvimento:
-* **Node:** v12+
+* **Node:** v12+ com `npm` e `yarn`(opcional, mas recomendado)
+* **Linux:** Ubuntu 18.04+ e, possivelmente, qualquer distro com `npm`
+* **Windows**: Falha com _packages_
+* **Mac**: Falha com _packages_
 
 ## Como rodar o projeto na máquina local:
 
@@ -131,22 +139,27 @@ FAUNA_ADMIN_KEY= (CHAVE DO ADMIN DO BANCO DE DADOS)
 FAUNADB_KEY= (CHAVE SECRETA DO NEXT PARA O FAUNA)
 FAUNADB_CLIENT_KEY= (CHAVE DO USUÁRIO FINAL PARA O FAUNA)
 
-GITHUB_CLIENT_ID= (OPCIONAL = ID PARA OAUTH DO GITHUB)
-GITHUB_CLIENT_SECRET= (OPCIONAL = ID MESTRE PARA OAUTH DO GITHUB)
-
 EMAIL_SERVER= (smtp://email@email.com:asenha@smtp.email.com:587) (O SEU SERVIDOR DE EMAIL)
 EMAIL_FROM=(REMETENTE DO EMAIL)
 
-BACKEND_ADMIN_TOKEN= (TOKEN DE ACESSO ADMIN DO BANCO DE DADOS DO EXPRESS)
 ```
 
 * Instale as dependências utilizando ``yarn`` ou ``npm`` na pasta do repositório,
 * Para iniciar no modo "desenvolvimento", inicie com ``yarn dev`` ou `npm run dev`. O Next/Webpack servirá o ambiente Next na rede local na porta ``3000``,
 * Para iniciar uma `production`, build da aplicação Next.js com node, basta ``yarn build``, após a build for criada, execute ``yarn start`` para iniciar, depois disso, é só copiar o link da aplicação que aparecerá no terminal e pronto!
 
+> Sobre as chaves de acesso e variáveis de ambiente, contate-me por [email]
+
+* Ou crie um banco de dados serverless pelo [faunadb](https://fauna.com) e adicione as chave secreta de acesso no ambiente de desenvolvimento(FAUNA_ADMIN_KEY)
+* **Documentação das queries, collections, indexes e permissões do banco de dados em breve.**
+
+---
+
+Feito com amor para mim, minha profissão e para quem está lendo este doc, seja nos momentos de empolgação ou estresse!
 
 **Agradecimentos à PROVI por todo o suporte e motivação e a Mind Consulting pelo programa, a oportunidade dada e especialmente às mentorias! <3**
 
 [stats.md]: ./stats.md
 [Provi]: https://provi.com.br
 [Mind Consulting]: https://mindconsulting.com.br
+[email]: mailto:contato@savilexperiments.com.br?cc=savio591@hotmail.com&subject=MCECase2Solicitação.env
