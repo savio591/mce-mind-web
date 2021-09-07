@@ -1,4 +1,5 @@
-<a href="https://mindconsulting.com.br/education/"><img src="https://user-images.githubusercontent.com/3879613/125519551-d46b63ee-50c5-4ead-be19-a911043df2a6.png" /></a>
+<a href="https://mindconsulting.com.br/education/">![image](https://user-images.githubusercontent.com/3879613/132265934-b3197a0e-0603-4fdc-b1d5-c55c03a0aa1f.png)
+</a>
 
 ![jest](https://github.com/savio591/mce-mind-web/actions/workflows/jest.yml/badge.svg?branch=dev)
 ![codequality](https://github.com/savio591/mce-mind-web/actions/workflows/codeInspector.yml/badge.svg?branch=dev)
@@ -14,15 +15,32 @@
 [![mce](https://badgen.net/badge/icon/mind%20coding%20experience/red?icon=https://savilexperiments.com.br/assets/mce-icon-12px.svg&label)](https://conteudos.provi.com.br/mind-coding-experience/)
 
 
-⚠️ **Projeto em construção! Clique [aqui](https://github.com/savio591/mce-mind-web/tree/dev) para ir à branch de desenvolvimento** ⚠️
+> ⚠️ **Projeto ainda em construção! Você pode clicar [aqui](https://github.com/savio591/mce-mind-web/tree/dev) e ir para a branch de desenvolvimento** ⚠️
 
 # MCE - Case 2 - Plataforma de agendamento para personal trainers
 
-Segundo case do programa [Mind Coding Experience(MCE)](https://conteudos.provi.com.br/mind-coding-experience/), feito pela [Mind Consulting](https://mindconsulting.com.br/) em parceria com a fintech [Provi](https://provi.com.br), com o intuito de evoluir as habilidades técnicas participando de projetos e recebendo acompanhamento de profissionais do mercado.
+Segundo case do programa [Mind Coding Experience(MCE)](https://conteudos.provi.com.br/mind-coding-experience/), que está sendo feito pela [Mind Consulting] em parceria com a fintech [Provi], com o intuito de evoluir as habilidades técnicas participando de projetos e recebendo acompanhamento de profissionais do mercado.
 
-## A proposta do case 2: Storytelling
+## Tecnologias utilizadas:
 
-> Será desenvolvido um sistema para agendamentos de horários para personal trainers. A plataforma deve ser composta por um aplicativo e versão web, ambas com especificidades próprias e conter um CRM para controle CRUD dos clientes da plataforma. Os personal trainers podem criar sua conta e disponibilizar seus horários disponíveis, enquanto os alunos podem marcar os agendamentos pelo app.
+### Front-end web:
+
+- Server-Side-Rendering com Next.js/React.js,
+- Static Site Generation com Next.js/React.js,
+- React-icons(Font Awesome e Feather Icons),
+- StorybookJS(Design de componentes e props),
+- Cloudinary CMS(Gerenciamento e armazenamento de mídia),
+- FaunaDB(banco de dados serveless),
+- Next-auth(hooks de autenticação),
+- Axios(api),
+- SCSS(SASS),
+- Typescript.
+
+## A proposta-desafio do _Product Owner_:
+
+> P.S: Estatísticas do que foi feito, cumprido ou alterado durante o desenvolvimento do projeto está disponível em [stats.md]
+
+Será desenvolvido um sistema para agendamentos de horários para personal trainers. A plataforma deve ser composta por um aplicativo e versão web, ambas com especificidades próprias e conter um CRM para controle CRUD dos clientes da plataforma. Os personal trainers podem criar sua conta e disponibilizar seus horários disponíveis, enquanto os alunos podem marcar os agendamentos pelo app.
 
 ## Funcionalidades:
 
@@ -31,6 +49,7 @@ Segundo case do programa [Mind Coding Experience(MCE)](https://conteudos.provi.c
 O crud de usuários se baseia em ser possível realizar o cadastro e edição de dados referentes aos usuários.
 
 Os dados necessários para realizar o cadastro dos usuários são:
+
 * Nome
 * Senha
 * Email
@@ -125,18 +144,9 @@ BACKEND_ADMIN_TOKEN= (TOKEN DE ACESSO ADMIN DO BANCO DE DADOS DO EXPRESS)
 * Para iniciar no modo "desenvolvimento", inicie com ``yarn dev`` ou `npm run dev`. O Next/Webpack servirá o ambiente Next na rede local na porta ``3000``,
 * Para iniciar uma `production`, build da aplicação Next.js com node, basta ``yarn build``, após a build for criada, execute ``yarn start`` para iniciar, depois disso, é só copiar o link da aplicação que aparecerá no terminal e pronto!
 
-## Tecnologias utilizadas:
-
-### Front-end web:
-
-- Typescript,
-- Server-Side-Rendering com Next.js/React.js,
-- Static Site Generation com Next.js/React.js,
-- FaunaDB(banco de dados serveless),
-- Axios,
-- Next-auth,
-- SCSS(SASS),
-- React-icons,
-- Input-mask
 
 **Agradecimentos à PROVI por todo o suporte e motivação e a Mind Consulting pelo programa, a oportunidade dada e especialmente às mentorias! <3**
+
+[stats.md]: ./stats.md
+[Provi]: https://provi.com.br
+[Mind Consulting]: https://mindconsulting.com.br
